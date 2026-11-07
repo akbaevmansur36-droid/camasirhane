@@ -1,0 +1,53 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+data.json
+*.pid
+*.seed
+*.pid.lock
+
+# Build outputs
+dist/
+build/
+android/
+ios/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# WhatsApp Auth
+.wwebjs_auth/
+.wwebjs_cache/
+qr-code.png
+
+# Temporary files
+*.tmp
+*.temp
+*.zip
+
+# Environment
+.env
+.env.local
+.env.production
+
+# Capacitor
+android/
+ios/
+capacitor.config.json
