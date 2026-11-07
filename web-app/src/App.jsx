@@ -4,7 +4,7 @@ import DryingRacks from './components/DryingRacks';
 import QueueStatus from './components/QueueStatus';
 import UserPanel from './components/UserPanel';
 import AdminPanel from './components/AdminPanel';
-import { apiUrl, websocketUrl } from './api';
+import { apiUrl, websocketUrl, shouldUseWebSocket } from './api';
 
 function createUserId() {
   return globalThis.crypto?.randomUUID?.()
@@ -23,7 +23,7 @@ function App() {
   const [connectionLimit, setConnectionLimit] = useState(0);
 
   useEffect(() => {
-    if (!userId) return undefined;
+    if (!userId || !shouldUseWebSocket()) return undefined;
 
     let websocket;
     let reconnectTimer;
@@ -73,10 +73,26 @@ function App() {
   }, [userId]);
 
   useEffect(() => {
-    fetch(apiUrl('/api/status'))
-      .then(res => res.json())
-      .then(setData)
-      .catch(console.error);
+    let disposed = false;
+    const load = () => {
+      if (document.hidden) return;
+      fetch(apiUrl('/api/status'), { cache: 'no-store' })
+        .then(res => res.json())
+        .then(result => { if (!disposed) setData(result); })
+        .catch(console.error);
+    };
+
+    load();
+    // Без WebSocket-сервера (например, на Netlify) состояние обновляется опросом
+    const interval = shouldUseWebSocket() ? null : window.setInterval(load, 3000);
+    window.addEventListener('focus', load);
+    window.addEventListener('laundry:changed', load);
+    return () => {
+      disposed = true;
+      if (interval) window.clearInterval(interval);
+      window.removeEventListener('focus', load);
+      window.removeEventListener('laundry:changed', load);
+    };
   }, []);
 
   useEffect(() => {

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { apiUrl } from '../api';
+import { apiFetch, apiUrl } from '../api';
 
 function AdminPanel({ data, userId, language, onClose }) {
   const [selectedUser, setSelectedUser] = useState('');
@@ -113,7 +113,7 @@ function AdminPanel({ data, userId, language, onClose }) {
     if (!selectedUser) return;
 
     try {
-      const response = await fetch(apiUrl('/api/admin/remove'), {
+      const response = await apiFetch(apiUrl('/api/admin/remove'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -138,7 +138,7 @@ function AdminPanel({ data, userId, language, onClose }) {
 
   const handleChangeRackCount = async () => {
     try {
-      const response = await fetch(apiUrl('/api/admin/racks/count'), {
+      const response = await apiFetch(apiUrl('/api/admin/racks/count'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

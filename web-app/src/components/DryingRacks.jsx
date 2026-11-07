@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { apiUrl } from '../api';
+import { apiFetch, apiUrl } from '../api';
 
 function DryingRacks({ racks, userId, language }) {
   const [showReserve, setShowReserve] = useState(false);
@@ -37,7 +37,7 @@ function DryingRacks({ racks, userId, language }) {
   const handleReserve = async () => {
     try {
       const userName = localStorage.getItem('userName');
-      const response = await fetch(apiUrl('/api/dry/reserve'), {
+      const response = await apiFetch(apiUrl('/api/dry/reserve'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

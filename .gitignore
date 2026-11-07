@@ -51,3 +51,6 @@ qr-code.png
 android/
 ios/
 capacitor.config.json
+
+# Local Netlify folder
+.netlify

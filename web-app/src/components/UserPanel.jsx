@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { apiUrl } from '../api';
+import { apiFetch, apiUrl } from '../api';
 
 function UserPanel({ data, userId, userName, language }) {
   const [showFinish, setShowFinish] = useState(false);
@@ -52,7 +52,7 @@ function UserPanel({ data, userId, userName, language }) {
 
   const handleFinish = async () => {
     try {
-      const response = await fetch(apiUrl('/api/finish'), {
+      const response = await apiFetch(apiUrl('/api/finish'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId })
@@ -73,7 +73,7 @@ function UserPanel({ data, userId, userName, language }) {
 
   const handleCancel = async () => {
     try {
-      const response = await fetch(apiUrl('/api/cancel'), {
+      const response = await apiFetch(apiUrl('/api/cancel'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId })

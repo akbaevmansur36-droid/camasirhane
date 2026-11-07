@@ -13,23 +13,31 @@
     "android:sync": "node scripts/validate-android-env.js && npm run build && cap sync android",
     "android:open": "cap open android"
   },
-  "keywords": ["laundry", "management", "dormitory"],
+  "keywords": [
+    "laundry",
+    "management",
+    "dormitory"
+  ],
   "author": "Mansur",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.21.1",
     "@capacitor/android": "^8.6.0",
     "@capacitor/core": "^8.6.0",
+    "@netlify/database": "^2.0.3",
+    "@netlify/functions": "^6.1.1",
     "cors": "^2.8.5",
-    "ws": "^8.18.0",
-    "node-cron": "^3.0.3"
+    "drizzle-orm": "^1.0.0-beta.22",
+    "express": "^4.21.1",
+    "node-cron": "^3.0.3",
+    "ws": "^8.18.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^4.3.3",
     "@capacitor/cli": "^8.6.0",
-    "vite": "^5.4.11",
+    "@vitejs/plugin-react": "^4.3.3",
     "concurrently": "^9.1.0",
+    "drizzle-kit": "^1.0.0-beta.22",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "vite": "^5.4.11"
   }
 }
