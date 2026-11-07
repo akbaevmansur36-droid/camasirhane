@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { apiUrl } from '../api';
+import { apiFetch, apiUrl } from '../api';
 
 function WashingMachines({ machines, userId, language }) {
   const [selectedMachine, setSelectedMachine] = useState(null);
@@ -34,7 +34,7 @@ function WashingMachines({ machines, userId, language }) {
   const handleReserve = async () => {
     try {
       const userName = localStorage.getItem('userName');
-      const response = await fetch(apiUrl('/api/wash/reserve'), {
+      const response = await apiFetch(apiUrl('/api/wash/reserve'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
